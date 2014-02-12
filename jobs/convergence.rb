@@ -1,14 +1,26 @@
 # Populate the graph with some random points
-points = []
-(1..10).each do |i|
-  points << { x: i, y: rand(50) }
+
+require "rubygems"
+require "json"
+require "net/http"
+require "uri"
+
+def get_data
+  uri = URI.parse("http://b.phodal.com/athome")
+
+  http = Net::HTTP.new(uri.host,uri.port)
+  request = Net::HTTP::Get.new(uri.request_uri)
+
+  response=http.request(request)
+  result=JSON.parse(response.body)
+
+  result.map do |data|
+    {x: data["id"].to_i, y: data["temperature"].to_i}
+  end
 end
-last_x = points.last[:x]
+
+points=get_data
 
 SCHEDULER.every '2s' do
-  points.shift
-  last_x += 1
-  points << { x: last_x, y: rand(50) }
-
-  send_event('convergence', points: points)
+  send_event('tempdata', points: points)
 end
