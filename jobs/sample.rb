@@ -21,9 +21,9 @@ current_karma = 0
 SCHEDULER.every '2s' do
   last_valuation = current_valuation
   current_valuation = rand(100)
-  current_karma=get_data(2)[0]["temperature"].to_i
-  last_karma=get_data(1)[0]["temperature"].to_i
-  send_event('valuation', { current: current_valuation, last: last_valuation })
-  send_event('karma', { current: current_karma, last: last_karma })
+  current_temperature = get_data(2)[0]["temperature"].to_i
+  last_temperature = get_data(1)[0]["temperature"].to_i
+  send_event('karma', { current: current_valuation, last: last_valuation })
+  send_event('temperature', { current: current_temperature, last: last_temperature })
   send_event('synergy',   { value: rand(100) })
 end
