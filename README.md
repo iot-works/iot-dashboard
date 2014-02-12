@@ -1,6 +1,11 @@
-Check out http://shopify.github.com/dashing for more information.
-=======
+=============
 iot-dashboard
 =============
 
-Internet of Things Dashboard
+ - Language : Ruby
+ - Framework: Dashboard
+
+##How to Run##
+
+   bundle install
+   dashing start
