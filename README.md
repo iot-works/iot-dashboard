@@ -9,5 +9,10 @@ iot-dashboard
 
 ##How to Run##
 
-   bundle install
-   dashing start
+1.安装依赖
+
+    bundle install
+
+2.启动
+
+    dashing start
